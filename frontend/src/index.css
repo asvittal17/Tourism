@@ -1,9 +1,3 @@
-/* src/index.css
-   Enhanced for dark-mode legibility + glass UI
-   Includes: high-contrast text colors, improved glass surfaces,
-   button/input text styles, and small a11y notes.
-*/
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
