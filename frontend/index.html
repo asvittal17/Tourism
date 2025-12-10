@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tourism Management - Enhanced</title>
+
+    <!-- Apply stored theme before paint to avoid flicker -->
+    <script>
+      (function () {
+        try {
+          var stored = null;
+          try { stored = localStorage.getItem("tm_theme"); } catch (e) {}
+          var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+          var theme = stored || (prefersDark ? "dark" : "light");
+
+          // immediately set class on <html> so no flicker
+          if (theme === "dark") document.documentElement.classList.add("dark");
+          else document.documentElement.classList.remove("dark");
+
+          // also expose for synchronous reads from React
+          document.documentElement.setAttribute("data-initial-theme", theme);
+        } catch (e) {
+          // ignore
+        }
+      })();
+    </script>
+
+    <!-- enable class-based dark mode for CDN Tailwind -->
+    <script>
+      window.tailwind = window.tailwind || {};
+      window.tailwind.config = {
+        darkMode: "class",
+        theme: { extend: {} }
+      };
+    </script>
+
+    <!-- Tailwind CDN (dev only) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="antialiased bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-50">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
